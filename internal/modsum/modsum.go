@@ -10,7 +10,7 @@ import (
 	"golang.org/x/mod/sumdb/dirhash"
 )
 
-func ModSum(dir, modPath, modVersion string) (sum, goModSum string, err error) {
+func SumModDir(dir, modPath, modVersion string) (sum, goModSum string, err error) {
 	prefix := modPath + "@" + modVersion
 
 	files, err := dirFiles(dir, prefix)
