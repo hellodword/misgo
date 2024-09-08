@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
@@ -12,9 +13,17 @@ import (
 )
 
 func main() {
-	dir := "tmp/mergo"
-	gitURL := "https://github.com/imdario/mergo"
-	modName, modVersion := "dario.cat/mergo", "v1.0.0"
+	base := "tmp"
+	modPath, modVersion := "dario.cat/mergo", "v1.0.0"
+
+	os.MkdirAll(base, 0755)
+
+	dir := filepath.Join(base, filepath.Base(modPath))
+
+	gitURL, err := modsum.FindRepository(modPath, modVersion)
+	if err != nil {
+		panic(err)
+	}
 
 	if _, err := os.Stat(dir); err != nil && errors.Is(err, os.ErrNotExist) {
 		_, err := git.PlainClone(dir, false, &git.CloneOptions{
@@ -32,7 +41,7 @@ func main() {
 	// lookup from sum.golang.org
 	ops := modsum.NewGoChecksumDatabaseClient()
 	c := sumdb.NewClient(ops)
-	records, err := c.Lookup(modName, modVersion)
+	records, err := c.Lookup(modPath, modVersion)
 	if err != nil {
 		panic(err)
 	}
@@ -42,7 +51,7 @@ func main() {
 
 	fmt.Println(records[0])
 
-	sum, _, err := modsum.ModSum(dir, modName, modVersion)
+	sum, _, err := modsum.ModSum(dir, modPath, modVersion)
 	if err != nil {
 		panic(err)
 	}
