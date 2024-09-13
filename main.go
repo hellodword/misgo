@@ -21,7 +21,7 @@ import (
 func main() {
 	log.SetLevel(log.InfoLevel)
 
-	base := "/tmp/misgo"
+	base := filepath.Join(os.TempDir(), "misgo")
 	os.MkdirAll(base, 0755)
 
 	modRoot := "."
