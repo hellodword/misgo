@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  git-server:
+    hostname: git-server
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: "no"
+
+  pub:
+    image: cloudflare/cloudflared:latest
+    restart: always
+    command: tunnel --no-autoupdate --loglevel info --transport-loglevel fatal --url http://git-server:8080 --protocol http2
