@@ -20,6 +20,9 @@ Although some Go modules are open-sourced, they use custom domain names for thei
 - [ ] recursively parse dependencies
 - [ ] deal with pseudo version[^1]
 - [ ] enhance fetchers: `https://github.com/FiloSottile/edwards25519/archive/<tag or commit>.zip` , see nixpkgs' fetchers https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/fetchgithub/default.nix
-- [ ] create an evil example
+- [ ] PoCs
+  - [x] [normal tag](./evil-normal-tag): host a git http server, response evil things for goproxy only
+  - [ ] pseudo version as tag name: generate a pseudo version and use it as tag name
+  - [ ] fake pseudo version: generate same pseudo version with vanity hash
 
 [^1]: https://github.com/prasmussen/git-vanity-hash
