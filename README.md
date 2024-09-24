@@ -22,4 +22,4 @@ Although some Go modules are open-sourced, they use custom domain names for thei
 - [ ] enhance fetchers: `https://github.com/FiloSottile/edwards25519/archive/<tag or commit>.zip` , see nixpkgs' fetchers https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/fetchgithub/default.nix
 - [ ] create an evil example
 
-[^1]: https://news.ycombinator.com/item?id=37333545
+[^1]: https://github.com/prasmussen/git-vanity-hash
